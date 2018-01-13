@@ -12,6 +12,8 @@
 		4510D4FE200A556B00C233D0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4510D4FC200A556B00C233D0 /* Main.storyboard */; };
 		4510D500200A556B00C233D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4510D4FF200A556B00C233D0 /* Assets.xcassets */; };
 		4510D503200A556B00C233D0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4510D501200A556B00C233D0 /* LaunchScreen.storyboard */; };
+		4510D50F200A569C00C233D0 /* PlayingCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4510D50E200A569C00C233D0 /* PlayingCard.swift */; };
+		4510D511200A596D00C233D0 /* PlayingCardDeck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4510D510200A596D00C233D0 /* PlayingCardDeck.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		4510D4FF200A556B00C233D0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4510D502200A556B00C233D0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4510D504200A556B00C233D0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4510D50E200A569C00C233D0 /* PlayingCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayingCard.swift; sourceTree = "<group>"; };
+		4510D510200A596D00C233D0 /* PlayingCardDeck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayingCardDeck.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +59,7 @@
 			isa = PBXGroup;
 			children = (
 				4510D50A200A557A00C233D0 /* Resources */,
+				4510D50D200A567800C233D0 /* Model */,
 				4510D50B200A558800C233D0 /* View */,
 				4510D50C200A559000C233D0 /* Controller */,
 			);
@@ -86,6 +91,15 @@
 				4510D4FA200A556B00C233D0 /* ViewController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		4510D50D200A567800C233D0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4510D50E200A569C00C233D0 /* PlayingCard.swift */,
+				4510D510200A596D00C233D0 /* PlayingCardDeck.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -161,6 +175,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				4510D4FB200A556B00C233D0 /* ViewController.swift in Sources */,
+				4510D511200A596D00C233D0 /* PlayingCardDeck.swift in Sources */,
+				4510D50F200A569C00C233D0 /* PlayingCard.swift in Sources */,
 				4510D4F9200A556B00C233D0 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
