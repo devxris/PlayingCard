@@ -45,6 +45,12 @@ class MultiCardsViewController: UIViewController {
 		return cardViews.filter { $0.isFaceUp && !$0.isHidden }
 	}
 	
+	private var faceUpCardViewMatch: Bool {
+		return faceUpCardViews.count == 2
+			&& faceUpCardViews[0].rank == faceUpCardViews[1].rank
+			&& faceUpCardViews[0].suit == faceUpCardViews[1].suit
+	}
+	
 	// MARK: Objc selectors
 	
 	@objc func flipCard(_ recognizer: UITapGestureRecognizer) {
@@ -57,8 +63,37 @@ class MultiCardsViewController: UIViewController {
 								  options: [.transitionFlipFromLeft],
 								  animations: { chosenCardView.isFaceUp = !chosenCardView.isFaceUp },
 								  completion: { finish in
-									// flip card down if there are 2 cards face up
-									if self.faceUpCardViews.count == 2 {
+									if self.faceUpCardViewMatch { // scale up -> scale down -> fade out
+										UIViewPropertyAnimator.runningPropertyAnimator( // scale up
+											withDuration: 0.6,
+											delay: 0,
+											options: [],
+											animations: {
+												self.faceUpCardViews.forEach {
+													$0.transform = CGAffineTransform.identity.scaledBy(x: 3.0, y: 3.0) }
+										    },
+											completion: { (position) in // scale down and fade out
+												UIViewPropertyAnimator.runningPropertyAnimator(
+													withDuration: 0.6,
+													delay: 0,
+													options: [],
+													animations: {
+														self.faceUpCardViews.forEach {
+															$0.transform = CGAffineTransform.identity.scaledBy(x: 0.1, y: 0.1)
+															$0.alpha = 0
+														}
+												    },
+													completion: { (position) in // clean up to original state
+														self.faceUpCardViews.forEach {
+															$0.isHidden = true
+															$0.alpha = 1
+															$0.transform = .identity
+														}
+													}
+												)
+											}
+										)
+									} else if self.faceUpCardViews.count == 2 { // flip card down if 2 cards face up
 										self.faceUpCardViews.forEach { cardView in
 											UIView.transition(with: cardView,
 															  duration: 0.6,
