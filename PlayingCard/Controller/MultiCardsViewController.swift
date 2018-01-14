@@ -21,7 +21,10 @@ class MultiCardsViewController: UIViewController {
 	// MARK: Properties
 	
 	private var faceUpCardViews: [PlayingCardView] { // trace how many cards are face up
-		return cardViews.filter { $0.isFaceUp && !$0.isHidden }
+		return cardViews.filter { $0.isFaceUp
+			&& !$0.isHidden
+			&& $0.transform != CGAffineTransform.identity.scaledBy(x: 3.0, y: 3.0)
+			&& $0.alpha == 1 }
 	}
 	
 	private var faceUpCardViewMatch: Bool {
@@ -29,6 +32,8 @@ class MultiCardsViewController: UIViewController {
 			&& faceUpCardViews[0].rank == faceUpCardViews[1].rank
 			&& faceUpCardViews[0].suit == faceUpCardViews[1].suit
 	}
+	
+	private var lastChosenCardView: PlayingCardView?
 	
 	// Dynamic animator: create animator <- add behaviors <- add items
 	private lazy var animator = UIDynamicAnimator(referenceView: self.view)
@@ -63,35 +68,43 @@ class MultiCardsViewController: UIViewController {
 	@objc func flipCard(_ recognizer: UITapGestureRecognizer) {
 		switch recognizer.state {
 		case .ended :
-			if let chosenCardView = recognizer.view as? PlayingCardView {
+			if let chosenCardView = recognizer.view as? PlayingCardView, faceUpCardViews.count < 2 {
+				
+				// track down the last chosen card view
+				lastChosenCardView = chosenCardView
+				
+				// stop card behavior and add back if 2 face up cards not matched or flip one chosen card back
+				cardBehavior.removeItem(chosenCardView)
+				
 				// flip card up with UIView.transition(with:, duration:, options: animations:, completion:)
 				UIView.transition(with: chosenCardView,
 								  duration: 0.6,
 								  options: [.transitionFlipFromLeft],
 								  animations: { chosenCardView.isFaceUp = !chosenCardView.isFaceUp },
 								  completion: { finish in
+									let cardsToAnimate = self.faceUpCardViews // trace down the original two chosen cards
 									if self.faceUpCardViewMatch { // scale up -> scale down -> fade out
 										UIViewPropertyAnimator.runningPropertyAnimator( // scale up
 											withDuration: 0.6,
 											delay: 0,
 											options: [],
 											animations: {
-												self.faceUpCardViews.forEach {
+												cardsToAnimate.forEach {
 													$0.transform = CGAffineTransform.identity.scaledBy(x: 3.0, y: 3.0) }
 										    },
 											completion: { (position) in // scale down and fade out
 												UIViewPropertyAnimator.runningPropertyAnimator(
-													withDuration: 0.6,
+													withDuration: 0.75,
 													delay: 0,
 													options: [],
 													animations: {
-														self.faceUpCardViews.forEach {
+														cardsToAnimate.forEach {
 															$0.transform = CGAffineTransform.identity.scaledBy(x: 0.1, y: 0.1)
 															$0.alpha = 0
 														}
 												    },
 													completion: { (position) in // clean up to original state
-														self.faceUpCardViews.forEach {
+														cardsToAnimate.forEach {
 															$0.isHidden = true
 															$0.alpha = 1
 															$0.transform = .identity
@@ -101,12 +114,19 @@ class MultiCardsViewController: UIViewController {
 											}
 										)
 									} else if self.faceUpCardViews.count == 2 { // flip card down if 2 cards face up
-										self.faceUpCardViews.forEach { cardView in
-											UIView.transition(with: cardView,
-															  duration: 0.6,
-															  options: [.transitionFlipFromLeft],
-															  animations: { cardView.isFaceUp = !cardView.isFaceUp }
-											)
+										if chosenCardView == self.lastChosenCardView { // let 2nd card control the animation
+											cardsToAnimate.forEach { cardView in
+												UIView.transition(with: cardView,
+																  duration: 0.6,
+																  options: [.transitionFlipFromLeft],
+																  animations: { cardView.isFaceUp = false },
+																  completion: { finish in self.cardBehavior.addItem(cardView) } // add behavior back
+												)
+											}
+										}
+									} else {
+										if !chosenCardView.isFaceUp {
+											self.cardBehavior.addItem(chosenCardView) // add behavior back
 										}
 									}
 								  }
