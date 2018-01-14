@@ -8,14 +8,15 @@
 
 import UIKit
 
+@IBDesignable
 class PlayingCardView: UIView {
 	
 	// MARK: Properties
 	
 	// setNeedsDisplay() is for calling draw(_ rect); setNeedsLayout() is for sub view calling layoutSubviews()
-	var rank: Int = 5 { didSet { setNeedsDisplay(); setNeedsLayout() } }
-	var suit: String = "♥️" { didSet { setNeedsDisplay(); setNeedsLayout() } }
-	var isFaceUp: Bool = false { didSet { setNeedsDisplay(); setNeedsLayout() } }
+	@IBInspectable var rank: Int = 5 { didSet { setNeedsDisplay(); setNeedsLayout() } }
+	@IBInspectable var suit: String = "♥️" { didSet { setNeedsDisplay(); setNeedsLayout() } }
+	@IBInspectable var isFaceUp: Bool = false { didSet { setNeedsDisplay(); setNeedsLayout() } }
 	
 	// MARK: Private properties and funcs
 	
@@ -126,7 +127,9 @@ class PlayingCardView: UIView {
 		
 		if isFaceUp {
 			// draw poker card image with UIImage
-			if let faceCardImage = UIImage(named: rankString + suit) {
+			if let faceCardImage = UIImage(named: rankString + suit,
+										   in: Bundle(for: self.classForCoder),
+										   compatibleWith: traitCollection) {
 				faceCardImage.draw(in: bounds.zoom(by: SizeRatio.faceCardImageSizeToBoundsSize))
 			// draw pips with NSAttributedString
 			} else {
@@ -134,10 +137,14 @@ class PlayingCardView: UIView {
 			}
 		} else {
 			// draw card back image with UIImage
-			if let cardbackImage = UIImage(named: "cardback") {
+			if let cardbackImage = UIImage(named: "cardback",
+										   in: Bundle(for: self.classForCoder),
+										   compatibleWith: traitCollection) {
 				cardbackImage.draw(in: bounds)
 			}
 		}
+		
+		
 	}
 }
 
