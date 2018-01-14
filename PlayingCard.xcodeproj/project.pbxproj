@@ -16,6 +16,7 @@
 		4510D511200A596D00C233D0 /* PlayingCardDeck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4510D510200A596D00C233D0 /* PlayingCardDeck.swift */; };
 		4510D513200B340B00C233D0 /* PlayingCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4510D512200B340B00C233D0 /* PlayingCardView.swift */; };
 		4510D517200BA62F00C233D0 /* MultiCardsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4510D516200BA62F00C233D0 /* MultiCardsViewController.swift */; };
+		45C38B0D200BB498006F1EE7 /* CardBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C38B0C200BB498006F1EE7 /* CardBehavior.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		4510D510200A596D00C233D0 /* PlayingCardDeck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayingCardDeck.swift; sourceTree = "<group>"; };
 		4510D512200B340B00C233D0 /* PlayingCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayingCardView.swift; sourceTree = "<group>"; };
 		4510D516200BA62F00C233D0 /* MultiCardsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiCardsViewController.swift; sourceTree = "<group>"; };
+		45C38B0C200BB498006F1EE7 /* CardBehavior.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardBehavior.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 				4510D50D200A567800C233D0 /* Model */,
 				4510D50B200A558800C233D0 /* View */,
 				4510D50C200A559000C233D0 /* Controller */,
+				45C38B0B200BB46F006F1EE7 /* Dynamic Behaviors */,
 			);
 			path = PlayingCard;
 			sourceTree = "<group>";
@@ -106,6 +109,14 @@
 				4510D510200A596D00C233D0 /* PlayingCardDeck.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		45C38B0B200BB46F006F1EE7 /* Dynamic Behaviors */ = {
+			isa = PBXGroup;
+			children = (
+				45C38B0C200BB498006F1EE7 /* CardBehavior.swift */,
+			);
+			path = "Dynamic Behaviors";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -186,6 +197,7 @@
 				4510D50F200A569C00C233D0 /* PlayingCard.swift in Sources */,
 				4510D513200B340B00C233D0 /* PlayingCardView.swift in Sources */,
 				4510D4F9200A556B00C233D0 /* AppDelegate.swift in Sources */,
+				45C38B0D200BB498006F1EE7 /* CardBehavior.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

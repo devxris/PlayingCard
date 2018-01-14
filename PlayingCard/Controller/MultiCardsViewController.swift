@@ -32,20 +32,7 @@ class MultiCardsViewController: UIViewController {
 	
 	// Dynamic animator: create animator <- add behaviors <- add items
 	private lazy var animator = UIDynamicAnimator(referenceView: self.view)
-	private lazy var collisionBehavior: UICollisionBehavior = {
-		let collision = UICollisionBehavior()
-		collision.translatesReferenceBoundsIntoBoundary = true
-		animator.addBehavior(collision)
-		return collision
-	}()
-	private lazy var itemBehavior: UIDynamicItemBehavior = {
-		let item = UIDynamicItemBehavior()
-		item.allowsRotation = false
-		item.elasticity = 1.0 // not loss or gain energy
-		item.resistance = 0.0
-		animator.addBehavior(item)
-		return item
-	}()
+	private lazy var cardBehavior = CardBehavior(animator: self.animator)
 	
 	// MARK: View Life Cycles
 	
@@ -66,16 +53,8 @@ class MultiCardsViewController: UIViewController {
 			// add tap gesture to flip card
 			cardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(flipCard(_:))))
 			
-			// add card view to collision and item behaviors
-			collisionBehavior.addItem(cardView)
-			itemBehavior.addItem(cardView)
-			
-			// add card view to push behavior ( need to know the object to push )
-			let push = UIPushBehavior(items: [cardView], mode: .instantaneous) // better to clean up hereafter since instantaneous mode
-			push.angle = (2 * CGFloat.pi).arc4random
-			push.magnitude = CGFloat(1.0) + CGFloat(2.0).arc4random
-			push.action = { [unowned push] in push.dynamicAnimator?.removeBehavior(push) } // clean up
-			animator.addBehavior(push) // push immediately right after behavior added
+			// add card view to cardBehavior ( included collistion, item, and push behaviors )
+			cardBehavior.addItem(cardView)
 		}
 	}
 	
