@@ -214,6 +214,17 @@
                     </view>
                     <connections>
                         <outletCollection property="cardViews" destination="0JI-NS-ftU" collectionClass="NSMutableArray" id="fWy-H9-Utx"/>
+                        <outletCollection property="cardViews" destination="EaJ-y3-0dD" collectionClass="NSMutableArray" id="7nL-1e-wNF"/>
+                        <outletCollection property="cardViews" destination="RD0-2R-mxD" collectionClass="NSMutableArray" id="KVz-WW-rHx"/>
+                        <outletCollection property="cardViews" destination="L6g-G5-cVN" collectionClass="NSMutableArray" id="lWo-SR-Ynj"/>
+                        <outletCollection property="cardViews" destination="JyH-Ui-fjI" collectionClass="NSMutableArray" id="4ME-XZ-XNe"/>
+                        <outletCollection property="cardViews" destination="2od-XF-Kv0" collectionClass="NSMutableArray" id="f8Y-jB-t1B"/>
+                        <outletCollection property="cardViews" destination="hKQ-I1-jCN" collectionClass="NSMutableArray" id="f3S-GA-wkl"/>
+                        <outletCollection property="cardViews" destination="MSr-5L-DJm" collectionClass="NSMutableArray" id="yN0-EB-N39"/>
+                        <outletCollection property="cardViews" destination="QaQ-tk-FB0" collectionClass="NSMutableArray" id="RAf-4v-nfb"/>
+                        <outletCollection property="cardViews" destination="qvQ-U2-9Vr" collectionClass="NSMutableArray" id="sbl-fl-2ok"/>
+                        <outletCollection property="cardViews" destination="3jw-80-7pc" collectionClass="NSMutableArray" id="PqV-1K-rKh"/>
+                        <outletCollection property="cardViews" destination="Nc8-Vn-ueb" collectionClass="NSMutableArray" id="8IX-Na-5OB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VIo-8V-JUD" userLabel="First Responder" sceneMemberID="firstResponder"/>

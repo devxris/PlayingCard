@@ -39,13 +39,36 @@ class MultiCardsViewController: UIViewController {
 		}
 	}
 	
+	// MARK: Properties
+	
+	private var faceUpCardViews: [PlayingCardView] { // trace how many cards are face up
+		return cardViews.filter { $0.isFaceUp && !$0.isHidden }
+	}
+	
 	// MARK: Objc selectors
 	
 	@objc func flipCard(_ recognizer: UITapGestureRecognizer) {
 		switch recognizer.state {
 		case .ended :
 			if let chosenCardView = recognizer.view as? PlayingCardView {
-				chosenCardView.isFaceUp = !chosenCardView.isFaceUp
+				// flip card up with UIView.transition(with:, duration:, options: animations:, completion:)
+				UIView.transition(with: chosenCardView,
+								  duration: 0.6,
+								  options: [.transitionFlipFromLeft],
+								  animations: { chosenCardView.isFaceUp = !chosenCardView.isFaceUp },
+								  completion: { finish in
+									// flip card down if there are 2 cards face up
+									if self.faceUpCardViews.count == 2 {
+										self.faceUpCardViews.forEach { cardView in
+											UIView.transition(with: cardView,
+															  duration: 0.6,
+															  options: [.transitionFlipFromLeft],
+															  animations: { cardView.isFaceUp = !cardView.isFaceUp }
+											)
+										}
+									}
+								  }
+				)
 			}
 		default : break
 		}
