@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  SingleCardViewController.swift
 //  PlayingCard
 //
 //  Created by Chris Huang on 13/01/2018.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class SingleCardViewController: UIViewController {
 	
 	// MARK: Model
 	
