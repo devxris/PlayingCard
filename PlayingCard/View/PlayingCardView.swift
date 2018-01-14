@@ -18,6 +18,20 @@ class PlayingCardView: UIView {
 	@IBInspectable var suit: String = "♥️" { didSet { setNeedsDisplay(); setNeedsLayout() } }
 	@IBInspectable var isFaceUp: Bool = false { didSet { setNeedsDisplay(); setNeedsLayout() } }
 	
+	// MARK: Objc Selectors
+	
+	// no need to setNeedsLayout(relayout) cause it won't affect the corner
+	private var faceCardScale: CGFloat = SizeRatio.faceCardImageSizeToBoundsSize { didSet { setNeedsDisplay() } }
+	
+	@objc func adjustFaceCardScale(byHandlingGestureRecognizer recognizer: UIPinchGestureRecognizer) {
+		switch recognizer.state {
+		case .changed, .ended :
+			faceCardScale *= recognizer.scale
+			recognizer.scale = 1.0 // reset to 1.0 for incremental scale
+		default: break
+		}
+	}
+	
 	// MARK: Private properties and funcs
 	
 	// draw corner symbols by UILabel() (subView) with NSAttributedString
@@ -130,7 +144,7 @@ class PlayingCardView: UIView {
 			if let faceCardImage = UIImage(named: rankString + suit,
 										   in: Bundle(for: self.classForCoder),
 										   compatibleWith: traitCollection) {
-				faceCardImage.draw(in: bounds.zoom(by: SizeRatio.faceCardImageSizeToBoundsSize))
+				faceCardImage.draw(in: bounds.zoom(by: faceCardScale))
 			// draw pips with NSAttributedString
 			} else {
 				drawPips()
@@ -143,8 +157,6 @@ class PlayingCardView: UIView {
 				cardbackImage.draw(in: bounds)
 			}
 		}
-		
-		
 	}
 }
 
