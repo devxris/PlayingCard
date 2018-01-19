@@ -27,6 +27,11 @@ class CardBehavior: UIDynamicBehavior {
 		item.resistance = 0.0
 		return item
 	}()
+	lazy var gravityBehavior: UIGravityBehavior = {
+		let gravity = UIGravityBehavior()
+		gravity.magnitude = 0.0 // no gravity until turn accelerometer on
+		return gravity
+	}()
 	
 	// MARK: Private funcs
 
@@ -58,12 +63,14 @@ class CardBehavior: UIDynamicBehavior {
 	func addItem(_ item: UIDynamicItem) {
 		collisionBehavior.addItem(item)
 		itemBehavior.addItem(item)
+		gravityBehavior.addItem(item)
 		push(item)
 	}
 	
 	func removeItem(_ item: UIDynamicItem) {
 		collisionBehavior.removeItem(item)
 		itemBehavior.removeItem(item)
+		gravityBehavior.removeItem(item)
 		// since push is instantaneous mode, already removed it right after push
 	}
 	
@@ -73,6 +80,7 @@ class CardBehavior: UIDynamicBehavior {
 		super.init()
 		addChildBehavior(collisionBehavior)
 		addChildBehavior(itemBehavior)
+		addChildBehavior(gravityBehavior)
 		// push behavior needs to know the "item" to push, so not addChildBehavior here
 	}
 	

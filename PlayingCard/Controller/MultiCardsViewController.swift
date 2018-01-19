@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreMotion
 
 class MultiCardsViewController: UIViewController {
 
@@ -39,7 +40,40 @@ class MultiCardsViewController: UIViewController {
 	private lazy var animator = UIDynamicAnimator(referenceView: self.view)
 	private lazy var cardBehavior = CardBehavior(animator: self.animator)
 	
-	// MARK: View Life Cycles
+	// MARK: ViewController Life Cycles
+	
+	// turn accelerometer on when view appears
+	override func viewDidAppear(_ animated: Bool) {
+		super.viewDidAppear(animated)
+		
+		// get a shared motion manager and check availibility of accelerometer
+		if CMMotionManager.shared.isAccelerometerAvailable {
+			// configure the update interval
+			CMMotionManager.shared.accelerometerUpdateInterval = 1/10
+			// turn on gravity effect
+			cardBehavior.gravityBehavior.magnitude = 1.0
+			// register a closure with accelerometer and get back accelerometer data
+			CMMotionManager.shared.startAccelerometerUpdates(to: .main) { (data, error) in
+				if var x = data?.acceleration.x, var y = data?.acceleration.y {
+					/* Be aware of hardware and view are in different coordinate systems and auto rotation */
+					switch UIDevice.current.orientation {
+					case .portrait : y *= -1
+					case .portraitUpsideDown : break
+					case .landscapeRight : swap(&x, &y)
+					case .landscapeLeft : swap(&x, &y); y *= -1
+					default : x = 0; y = 0
+					}
+					self.cardBehavior.gravityBehavior.gravityDirection = CGVector(dx: x, dy: -y)
+				}
+			}
+		}
+	}
+	
+	override func viewWillDisappear(_ animated: Bool) {
+		super.viewWillDisappear(animated)
+		cardBehavior.gravityBehavior.magnitude = 0 // stop gravity
+		CMMotionManager.shared.stopAccelerometerUpdates() // stop accelerometer
+	}
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()

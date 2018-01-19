@@ -16,6 +16,7 @@
 		4510D511200A596D00C233D0 /* PlayingCardDeck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4510D510200A596D00C233D0 /* PlayingCardDeck.swift */; };
 		4510D513200B340B00C233D0 /* PlayingCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4510D512200B340B00C233D0 /* PlayingCardView.swift */; };
 		4510D517200BA62F00C233D0 /* MultiCardsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4510D516200BA62F00C233D0 /* MultiCardsViewController.swift */; };
+		458B092F20119EAA00D349C5 /* CMMotionManager+shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458B092E20119EAA00D349C5 /* CMMotionManager+shared.swift */; };
 		45C38B0D200BB498006F1EE7 /* CardBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C38B0C200BB498006F1EE7 /* CardBehavior.swift */; };
 /* End PBXBuildFile section */
 
@@ -31,6 +32,7 @@
 		4510D510200A596D00C233D0 /* PlayingCardDeck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayingCardDeck.swift; sourceTree = "<group>"; };
 		4510D512200B340B00C233D0 /* PlayingCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayingCardView.swift; sourceTree = "<group>"; };
 		4510D516200BA62F00C233D0 /* MultiCardsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiCardsViewController.swift; sourceTree = "<group>"; };
+		458B092E20119EAA00D349C5 /* CMMotionManager+shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CMMotionManager+shared.swift"; sourceTree = "<group>"; };
 		45C38B0C200BB498006F1EE7 /* CardBehavior.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardBehavior.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -115,6 +117,7 @@
 			isa = PBXGroup;
 			children = (
 				45C38B0C200BB498006F1EE7 /* CardBehavior.swift */,
+				458B092E20119EAA00D349C5 /* CMMotionManager+shared.swift */,
 			);
 			path = "Dynamic Behaviors";
 			sourceTree = "<group>";
@@ -193,6 +196,7 @@
 			files = (
 				4510D4FB200A556B00C233D0 /* SingleCardViewController.swift in Sources */,
 				4510D511200A596D00C233D0 /* PlayingCardDeck.swift in Sources */,
+				458B092F20119EAA00D349C5 /* CMMotionManager+shared.swift in Sources */,
 				4510D517200BA62F00C233D0 /* MultiCardsViewController.swift in Sources */,
 				4510D50F200A569C00C233D0 /* PlayingCard.swift in Sources */,
 				4510D513200B340B00C233D0 /* PlayingCardView.swift in Sources */,
